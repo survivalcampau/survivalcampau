@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- RENAME: the app name and URL are written out in this block because search engines and
+       link previews don't run JavaScript. Keep it in step with config.js (README: "Rename the app"). -->
+  <title>SurvivalCamp: Learn real survival skills</title>
+  <meta name="description" content="A survival skills app for Australians: bite-sized lessons, real-world missions, a skill tree and field days near Sydney. Join the waitlist.">
+  <link rel="canonical" href="https://survivalcampau.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SurvivalCamp">
+  <meta property="og:title" content="SurvivalCamp: Learn real survival skills">
+  <meta property="og:description" content="Bite-sized lessons, real-world missions and field days near Sydney. Join the waitlist.">
+  <meta property="og:url" content="https://survivalcampau.github.io/">
+  <meta property="og:image" content="https://survivalcampau.github.io/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Illustrated campsite with the headline: Stop watching. Start doing.">
+  <meta property="og:locale" content="en_AU">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- /RENAME -->
+
+  <meta name="theme-color" content="#2E3A2C">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400..700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js" defer></script>
+  <script src="script.js" defer></script>
+
+  <!--
+    Analytics (optional). Paste ONE privacy-friendly provider's snippet here, then add a line
+    about it to the privacy note in the footer. For example, Cloudflare Web Analytics (free, no cookies):
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "YOUR_TOKEN"}'></script>
+    Plausible and GoatCounter work too: copy the snippet from your dashboard.
+  -->
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Icon sprite -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-fire" viewBox="0 0 48 48">
+      <path fill="#D96B2B" d="M24 4c3 8 12 12 12 24a12 12 0 0 1-24 0c0-6 3-10 6-13 0 4 2 6 4 7 0-7 0-13 2-18z"/>
+      <path fill="#F4B860" d="M24 22c2 5 6 7 6 12a6 6 0 0 1-12 0c0-3 1.5-5 3-6.5.5 2 1.5 3 2.5 3.5 0-3.5-.5-6 .5-9z"/>
+    </symbol>
+    <symbol id="i-water" viewBox="0 0 48 48">
+      <path fill="#4F7F8C" d="M24 5S11 19.5 11 30a13 13 0 0 0 26 0C37 19.5 24 5 24 5z"/>
+      <path fill="none" stroke="#FBF7EF" stroke-width="3" stroke-linecap="round" opacity=".85" d="M17.5 30.5a7 7 0 0 0 5.5 6.5"/>
+    </symbol>
+    <symbol id="i-shelter" viewBox="0 0 48 48">
+      <path fill="#D96B2B" d="M24 8 42 39H6z"/>
+      <path fill="#B4521C" d="M24 8 42 39H24z"/>
+      <path fill="#2B2A26" d="M24 21 30.5 39h-13z"/>
+      <path fill="none" stroke="#5A3B24" stroke-width="3" stroke-linecap="round" d="M24 8V4"/>
+      <rect x="4" y="38" width="40" height="4" rx="2" fill="#5B6B4A"/>
+    </symbol>
+    <symbol id="i-nav" viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="19" fill="#FBF7EF" stroke="#2E3A2C" stroke-width="4"/>
+      <g transform="rotate(32 24 24)">
+        <path fill="#D96B2B" d="M24 9.5 29 24H19z"/>
+        <path fill="#2E3A2C" d="M24 38.5 19 24h10z"/>
+      </g>
+      <circle cx="24" cy="24" r="2.6" fill="#FBF7EF"/>
+    </symbol>
+    <symbol id="i-food" viewBox="0 0 48 48">
+      <path fill="#4F7F8C" d="M5 24c5-8 15-11 23-6l9-7v26l-9-7c-8 5-18 2-23-6z"/>
+      <path fill="none" stroke="#3B6470" stroke-width="2.5" stroke-linecap="round" d="M20 18.5c2 3.6 2 7.4 0 11"/>
+      <circle cx="13" cy="22.5" r="2.4" fill="#FBF7EF"/>
+      <circle cx="13.4" cy="22.5" r="1.1" fill="#2B2A26"/>
+    </symbol>
+    <symbol id="i-aid" viewBox="0 0 48 48">
+      <path fill="none" stroke="#2E3A2C" stroke-width="3.5" d="M17 14v-3.5a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3V14"/>
+      <rect x="5" y="13" width="38" height="28" rx="6" fill="#5B6B4A"/>
+      <path fill="#FBF7EF" d="M21 19h6v5h5v6h-5v5h-6v-5h-5v-6h5z"/>
+    </symbol>
+    <symbol id="i-bushfire" viewBox="0 0 48 48">
+      <path fill="#2E3A2C" d="M24 4 40 10v12c0 10-7 17.5-16 22C15 39.5 8 32 8 22V10z"/>
+      <path fill="#D96B2B" d="M24 14c2 5 7 8 7 14a7 7 0 0 1-14 0c0-3.5 1.8-6 3.6-7.8.2 2.3 1.2 3.6 2.4 4.3 0-3.8-.4-7 1-10.5z"/>
+      <path fill="#F4B860" d="M24 25c1.2 2.4 3.4 3.6 3.4 6.2a3.4 3.4 0 0 1-6.8 0c0-1.8 1-3 2-4 .2 1 .6 1.6 1 2 0-1.6 0-2.8.4-4.2z"/>
+    </symbol>
+    <symbol id="i-book" viewBox="0 0 48 48">
+      <path fill="#FBF7EF" stroke="#2E3A2C" stroke-width="3" stroke-linejoin="round" d="M24 12c-5-4-11-5-18-4v28c7-1 13 0 18 4z"/>
+      <path fill="#F1E6D1" stroke="#2E3A2C" stroke-width="3" stroke-linejoin="round" d="M24 12c5-4 11-5 18-4v28c-7-1-13 0-18 4z"/>
+      <path fill="none" stroke="#5B6B4A" stroke-width="2.4" stroke-linecap="round" d="M10.5 16c3.4-.3 6.4.2 9 1.6M10.5 22c3.4-.3 6.4.2 9 1.6M10.5 28c3.4-.3 6.4.2 9 1.6"/>
+      <path fill="#D96B2B" d="M33 15.5l4 7h-2.4l3.4 6H28l3.4-6H29z"/>
+    </symbol>
+    <symbol id="i-map" viewBox="0 0 48 48">
+      <path fill="#FBF7EF" stroke="#2E3A2C" stroke-width="3" stroke-linejoin="round" d="M5 11l12-4 14 4 12-4v30l-12 4-14-4-12 4z"/>
+      <path fill="none" stroke="#2E3A2C" stroke-width="2" opacity=".3" d="M17 7v30M31 11v30"/>
+      <path fill="none" stroke="#D96B2B" stroke-width="3" stroke-linecap="round" stroke-dasharray=".5 5.5" d="M10 34c4-6 9-2 13-7s7-8 11-9"/>
+      <path fill="none" stroke="#B4521C" stroke-width="3" stroke-linecap="round" d="M34 12.5l5 5m0-5-5 5"/>
+    </symbol>
+    <symbol id="i-levelup" viewBox="0 0 48 48">
+      <g fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="#5B6B4A" d="M11 39l13-9 13 9"/>
+        <path stroke="#2E3A2C" d="M11 28.5l13-9 13 9"/>
+        <path stroke="#D96B2B" d="M11 18l13-9 13 9"/>
+      </g>
+    </symbol>
+    <symbol id="i-flood" viewBox="0 0 48 48">
+      <g fill="none" stroke="#4F7F8C" stroke-width="3.5" stroke-linecap="round">
+        <path d="M5 17c3.2-3 6.3-3 9.5 0s6.3 3 9.5 0 6.3-3 9.5 0 6.3 3 9.5 0"/>
+        <path d="M5 26c3.2-3 6.3-3 9.5 0s6.3 3 9.5 0 6.3-3 9.5 0 6.3 3 9.5 0"/>
+        <path d="M5 35c3.2-3 6.3-3 9.5 0s6.3 3 9.5 0 6.3-3 9.5 0 6.3 3 9.5 0"/>
+      </g>
+    </symbol>
+    <symbol id="i-route" viewBox="0 0 48 48">
+      <path fill="none" stroke="#2E3A2C" stroke-width="3" stroke-linecap="round" stroke-dasharray=".5 5.5" d="M9 40c6 0 6-9 12-9s7 6 12 1"/>
+      <circle cx="9" cy="40" r="3.5" fill="#2E3A2C"/>
+      <path fill="#D96B2B" d="M34 5a8 8 0 0 0-8 8c0 6 8 14 8 14s8-8 8-14a8 8 0 0 0-8-8z"/>
+      <circle cx="34" cy="13" r="3" fill="#FBF7EF"/>
+    </symbol>
+    <symbol id="i-pine" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 2l5 8h-3l4.5 7h-13L10 10H7z"/>
+      <rect x="11" y="17" width="2" height="4" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/>
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-6-6 6 6 6-6"/>
+    </symbol>
+    <symbol id="i-share" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/>
+        <path d="M8.2 10.8l7.6-4.1M8.2 13.2l7.6 4.1"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top">
+        <img src="assets/favicon.svg" width="34" height="34" alt="">
+        <span class="brand-name" data-site-name>SurvivalCamp</span>
+      </a>
+      <a class="btn btn-sm" href="#signup"><span>Join<span class="sm-hide"> the</span> waitlist</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow pill"><svg class="eyebrow-icon" aria-hidden="true"><use href="#i-pine"/></svg>Survival skills app · Coming soon</p>
+          <h1 id="hero-title">Stop watching. <span class="accent">Start doing.</span></h1>
+          <p class="lede">Bite-sized lessons, real-world missions and field days near Sydney. Learn to do it, not just watch it.</p>
+          <div class="hero-cta">
+            <a class="btn btn-lg" href="#signup">Join the waitlist<svg class="btn-icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <p class="cta-note">Free to join. We'll email you when it's ready.</p>
+          </div>
+        </div>
+
+        <div class="hero-art">
+          <svg class="scene" viewBox="0 0 600 480" role="img" aria-labelledby="scene-title">
+            <title id="scene-title">Illustration: a campsite at dusk with a tent, a campfire with a billy on a tripod, pine trees and mountains</title>
+            <defs>
+              <clipPath id="sc-clip"><rect width="600" height="480" rx="28"/></clipPath>
+              <linearGradient id="sc-sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#F8E8CB"/>
+                <stop offset="1" stop-color="#F0CB98"/>
+              </linearGradient>
+              <radialGradient id="sc-glow">
+                <stop offset="0" stop-color="#F8C36E" stop-opacity=".6"/>
+                <stop offset=".5" stop-color="#F3A24A" stop-opacity=".16"/>
+                <stop offset="1" stop-color="#F3A24A" stop-opacity="0"/>
+              </radialGradient>
+              <symbol id="sc-pine" viewBox="0 0 60 100">
+                <rect x="26" y="80" width="8" height="20" rx="2" fill="#5A3B24"/>
+                <path style="fill:var(--p1,#2E3A2C)" d="M30 30 57 86H3z"/>
+                <path style="fill:var(--p2,#24301F)" d="M30 30 57 86H30z"/>
+                <path style="fill:var(--p1,#2E3A2C)" d="M30 13 51 60H9z"/>
+                <path style="fill:var(--p2,#24301F)" d="M30 13 51 60H30z"/>
+                <path style="fill:var(--p1,#2E3A2C)" d="M30 0 45 36H15z"/>
+                <path style="fill:var(--p2,#24301F)" d="M30 0 45 36H30z"/>
+              </symbol>
+            </defs>
+            <g clip-path="url(#sc-clip)">
+              <rect width="600" height="480" fill="url(#sc-sky)"/>
+              <!-- sun + birds -->
+              <circle cx="410" cy="132" r="66" fill="#F6CB8E" opacity=".5"/>
+              <circle cx="410" cy="132" r="40" fill="#F2B465"/>
+              <path fill="none" stroke="#5A564C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".5" d="M176 86q9-9 18 0q9-9 18 0M216 62q6-6 12 0q6-6 12 0"/>
+              <!-- far ridge -->
+              <path fill="#CDC6AB" d="M0 236C44 226 76 206 118 210S186 196 224 198 300 214 344 210 420 188 462 192 548 212 600 204V480H0Z"/>
+              <!-- main peak -->
+              <path fill="#ADAD8E" d="M300 108 530 330H70Z"/>
+              <path fill="#949679" d="M300 108 530 330H332l-12-56 9-52-17-46Z"/>
+              <path fill="#EEE2C9" d="M300 108 337 144 325 140 314 152 302 140 289 150 274 140 263 144Z"/>
+              <path fill="#DED1B6" d="M300 108 337 144 325 140 314 152 307 147Z"/>
+              <!-- right peak -->
+              <path fill="#8D9273" d="M498 170 660 330H350Z"/>
+              <path fill="#767C5F" d="M498 170 660 330H520l-8-44 10-40-14-40Z"/>
+              <path fill="#E6D9BE" d="M498 170 522 194 512 191 503 200 494 190 484 197 476 194Z"/>
+              <!-- left peak -->
+              <path fill="#9EA081" d="M118 192 262 330H-50Z"/>
+              <path fill="#878A6C" d="M118 192 262 330H140l-6-40 8-36-12-30Z"/>
+              <!-- hills + distant pines -->
+              <path fill="#8E9A6B" d="M0 300C60 282 116 286 176 294S292 290 352 284 470 292 530 288 584 280 600 279V480H0Z"/>
+              <g style="--p1:#5E6D4B;--p2:#52603F">
+                <use href="#sc-pine" x="14" y="266" width="20.4" height="34"/>
+                <use href="#sc-pine" x="31" y="250" width="26.4" height="44"/>
+                <use href="#sc-pine" x="55" y="262" width="18" height="30"/>
+                <use href="#sc-pine" x="139" y="260" width="21.6" height="36"/>
+                <use href="#sc-pine" x="156" y="252" width="27.6" height="46"/>
+                <use href="#sc-pine" x="182" y="266" width="19.2" height="32"/>
+                <use href="#sc-pine" x="362" y="256" width="20.4" height="34"/>
+                <use href="#sc-pine" x="379" y="244" width="26.4" height="44"/>
+                <use href="#sc-pine" x="401" y="260" width="18" height="30"/>
+              </g>
+              <!-- camp ground -->
+              <path fill="#728050" d="M0 322C100 314 190 318 300 322S500 318 600 312V480H0Z"/>
+              <g style="--p1:#3B4A36;--p2:#2F3C2B">
+                <use href="#sc-pine" x="11" y="238" width="57.6" height="96"/>
+                <use href="#sc-pine" x="50" y="210" width="72" height="120"/>
+                <use href="#sc-pine" x="103" y="252" width="50.4" height="84"/>
+                <use href="#sc-pine" x="155" y="262" width="42" height="70"/>
+                <use href="#sc-pine" x="511" y="244" width="50.4" height="84"/>
+              </g>
+              <ellipse cx="330" cy="398" rx="200" ry="40" fill="#A08A5C" opacity=".35"/>
+              <!-- tent -->
+              <ellipse cx="470" cy="386" rx="104" ry="8" fill="#2B2A26" opacity=".14"/>
+              <path fill="none" stroke="#4A453C" stroke-width="1.6" opacity=".55" d="M455 256 360 394M497 246 588 384"/>
+              <path fill="#A54A18" d="M455 262 497 252 570 372 532 384Z"/>
+              <path fill="#D96B2B" d="M455 262 532 384H378Z"/>
+              <path fill="#C85F23" d="M455 262 532 384H462Z"/>
+              <path fill="#3B2A1F" d="M455 296 432 384H478Z"/>
+              <path fill="#EC8D52" d="M455 296 432 384H414C428 352 440 322 455 296Z"/>
+              <path fill="none" stroke="#5A3B24" stroke-width="4" stroke-linecap="round" d="M455 262v-12M497 252v-12"/>
+              <!-- fire light -->
+              <g class="fire-light">
+                <circle cx="300" cy="352" r="84" fill="url(#sc-glow)"/>
+                <ellipse cx="300" cy="402" rx="116" ry="26" fill="#F2A64E" opacity=".3"/>
+              </g>
+              <!-- flames -->
+              <path class="flame flame-outer" fill="#D96B2B" d="M300 398C276 398 264 380 270 360C274 346 284 340 286 328C296 338 298 346 300 352C306 340 312 330 312 320C326 334 336 352 330 374C326 390 316 398 300 398Z"/>
+              <path class="flame flame-mid" fill="#F0A13C" d="M300 398C284 398 278 386 282 372C285 362 292 358 294 348C302 356 304 362 304 368C308 360 312 354 313 346C322 358 326 370 322 382C318 392 310 398 300 398Z"/>
+              <path class="flame flame-inner" fill="#F7D27A" d="M300 398C292 398 289 390 291 382C293 375 298 372 299 364C305 372 309 379 309 386C309 393 305 398 300 398Z"/>
+              <g fill="#F3B566">
+                <circle class="spark" cx="290" cy="312" r="2.2"/>
+                <circle class="spark" cx="318" cy="300" r="1.8"/>
+                <circle class="spark" cx="304" cy="290" r="1.5"/>
+              </g>
+              <!-- logs + stones -->
+              <rect x="258" y="386" width="84" height="14" rx="7" fill="#7A4A2A" transform="rotate(-12 300 393)"/>
+              <rect x="258" y="386" width="84" height="14" rx="7" fill="#64391F" transform="rotate(12 300 393)"/>
+              <g fill="#9C9580">
+                <ellipse cx="256" cy="404" rx="14" ry="8.5"/>
+                <ellipse cx="278" cy="410" rx="14" ry="8.5"/>
+                <ellipse cx="302" cy="412" rx="14" ry="8.5"/>
+                <ellipse cx="326" cy="410" rx="14" ry="8.5"/>
+                <ellipse cx="346" cy="404" rx="14" ry="8.5"/>
+              </g>
+              <g fill="#BAB39C">
+                <ellipse cx="254" cy="401" rx="8" ry="3.2"/>
+                <ellipse cx="276" cy="407" rx="8" ry="3.2"/>
+                <ellipse cx="300" cy="409" rx="8" ry="3.2"/>
+                <ellipse cx="324" cy="407" rx="8" ry="3.2"/>
+                <ellipse cx="344" cy="401" rx="8" ry="3.2"/>
+              </g>
+              <!-- tripod + billy -->
+              <path fill="none" stroke="#6B4428" stroke-width="6" stroke-linecap="round" d="M246 410 316 236M354 410 284 236"/>
+              <path fill="none" stroke="#3F3F3A" stroke-width="2.5" d="M300 276v8"/>
+              <path fill="none" stroke="#45453F" stroke-width="2.5" d="M284 296Q300 270 316 296"/>
+              <rect x="282" y="295" width="36" height="27" rx="4" fill="#8E989B"/>
+              <rect x="282" y="314" width="36" height="8" rx="3" fill="#4A4F50"/>
+              <rect x="287" y="299" width="6" height="14" rx="3" fill="#B9C1C3"/>
+              <rect x="279" y="290" width="42" height="7" rx="3.5" fill="#6F787B"/>
+              <path class="steam" fill="none" stroke="#FBF7EF" stroke-width="2.5" stroke-linecap="round" opacity=".7" d="M309 284c6-7-3-11 2-19M291 282c-5-7 3-11-2-18"/>
+              <!-- foreground -->
+              <path fill="#5B6B4A" d="M0 428C110 418 214 426 318 430S514 424 600 418V480H0Z"/>
+              <rect x="118" y="404" width="96" height="20" rx="10" fill="#7A4A2A"/>
+              <circle cx="204" cy="414" r="8" fill="#C08A5A"/>
+              <circle cx="204" cy="414" r="4" fill="none" stroke="#8E5A35" stroke-width="1.6"/>
+              <path fill="none" stroke="#4A5A3C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M98 446l4-12 3 10 4-14 3 14M238 452l3-9 3 8 3-11 3 11M414 446l4-12 3 10 4-14 3 14M500 458l3-9 3 8 3-11 3 11"/>
+              <use href="#sc-pine" x="-34" y="214" width="138" height="230"/>
+              <use href="#sc-pine" x="528" y="180" width="156" height="260"/>
+            </g>
+            <rect x="1" y="1" width="598" height="478" rx="27" fill="none" stroke="#2B2A26" stroke-opacity=".12" stroke-width="2"/>
+          </svg>
+
+          <figure class="lesson">
+            <figcaption class="sr-only">Example lesson from the app</figcaption>
+            <div class="lesson-top">
+              <span class="tile tile-sm"><svg aria-hidden="true"><use href="#i-water"/></svg></span>
+              <span class="lesson-meta">Water <span aria-hidden="true">·</span> Level 1</span>
+              <span class="xp">+20 XP</span>
+            </div>
+            <p class="lesson-title">Make water safe to drink</p>
+            <div class="lesson-progress">
+              <span class="bar" aria-hidden="true"><span style="width:25%"></span></span>
+              <span class="bar-label">1 of 4</span>
+            </div>
+            <ol class="steps" role="list">
+              <li class="is-done"><span class="tick" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Pick the clearest source you can find<span class="sr-only"> (done)</span></li>
+              <li><span class="tick" aria-hidden="true"></span>Strain it through a clean cloth</li>
+              <li><span class="tick" aria-hidden="true"></span>Bring to a rolling boil for at least 1 minute</li>
+              <li><span class="tick" aria-hidden="true"></span>Cool it covered, then store it clean</li>
+            </ol>
+            <p class="lesson-tip"><strong>Field note:</strong> boiling kills germs, but not chemicals or blue-green algae toxins.</p>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-title">From the couch to the bush</h2>
+        </div>
+        <ol class="how-grid" role="list">
+          <li class="card">
+            <span class="card-num" aria-hidden="true">01</span>
+            <span class="tile"><svg aria-hidden="true"><use href="#i-book"/></svg></span>
+            <h3>Learn</h3>
+            <p>Five-minute lessons on fire, water, shelter, navigation and more. Clear steps, no myths.</p>
+          </li>
+          <li class="card">
+            <span class="card-num" aria-hidden="true">02</span>
+            <span class="tile"><svg aria-hidden="true"><use href="#i-map"/></svg></span>
+            <h3>Practise</h3>
+            <p>Missions you actually do: in the backyard, at the park or out bush. Then try it for real at a field day near Sydney.</p>
+          </li>
+          <li class="card">
+            <span class="card-num" aria-hidden="true">03</span>
+            <span class="tile"><svg aria-hidden="true"><use href="#i-levelup"/></svg></span>
+            <h3>Level up</h3>
+            <p>Earn XP, keep your streak and unlock tougher missions as your skill tree grows.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Skill tree -->
+    <section class="section" aria-labelledby="skills-title">
+      <div class="container">
+        <div class="panel">
+          <div class="section-head">
+            <p class="eyebrow eyebrow-on-dark">The skill tree</p>
+            <h2 id="skills-title">Seven skills. Five levels each.</h2>
+            <p class="section-sub">Start with whatever you're keenest on. Every level unlocks harder missions.</p>
+          </div>
+
+          <div class="tree-scroll" role="region" aria-label="Skill tree">
+            <ul class="tree" role="list">
+              <li class="skill">
+                <span class="skill-icon"><svg aria-hidden="true"><use href="#i-fire"/></svg></span>
+                <span class="skill-name">Fire</span>
+                <span class="pips" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+                <span class="skill-lvl" aria-hidden="true">Lvl 3</span>
+                <span class="sr-only">, example level 3 of 5</span>
+              </li>
+              <li class="skill">
+                <span class="skill-icon"><svg aria-hidden="true"><use href="#i-water"/></svg></span>
+                <span class="skill-name">Water</span>
+                <span class="pips" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
+                <span class="skill-lvl" aria-hidden="true">Lvl 2</span>
+                <span class="sr-only">, example level 2 of 5</span>
+              </li>
+              <li class="skill">
+                <span class="skill-icon"><svg aria-hidden="true"><use href="#i-shelter"/></svg></span>
+                <span class="skill-name">Shelter</span>
+                <span class="pips" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
+                <span class="skill-lvl" aria-hidden="true">Lvl 2</span>
+                <span class="sr-only">, example level 2 of 5</span>
+              </li>
+              <li class="skill">
+                <span class="skill-icon"><svg aria-hidden="true"><use href="#i-nav"/></svg></span>
+                <span class="skill-name">Navigation</span>
+                <span class="pips" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></span>
+                <span class="skill-lvl" aria-hidden="true">Lvl 1</span>
+                <span class="sr-only">, example level 1 of 5</span>
+              </li>
+              <li class="skill">
+                <span class="skill-icon"><svg aria-hidden="true"><use href="#i-food"/></svg></span>
+                <span class="skill-name">Fishing &amp; food</span>
+                <span class="pips" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></span>
+                <span class="skill-lvl" aria-hidden="true">Lvl 1</span>
+                <span class="sr-only">, example level 1 of 5</span>
+              </li>
+              <li class="skill">
+                <span class="skill-icon"><svg aria-hidden="true"><use href="#i-aid"/></svg></span>
+                <span class="skill-name">First aid</span>
+                <span class="pips" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
+                <span class="skill-lvl" aria-hidden="true">Lvl 2</span>
+                <span class="sr-only">, example level 2 of 5</span>
+              </li>
+              <li class="skill skill-featured">
+                <span class="skill-tag">Aussie essential</span>
+                <span class="skill-icon"><svg aria-hidden="true"><use href="#i-bushfire"/></svg></span>
+                <span class="skill-name">Bushfire readiness</span>
+                <span class="pips" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></span>
+                <span class="skill-lvl" aria-hidden="true">Lvl 1</span>
+                <span class="sr-only">, example level 1 of 5</span>
+              </li>
+            </ul>
+          </div>
+          <p class="tree-note">Example progress shown.</p>
+
+          <div class="notes">
+            <h3 class="notes-title">Field notes</h3>
+            <p class="notes-sub">Three rules worth knowing before your first lesson.</p>
+            <ul class="notes-grid" role="list">
+              <li class="note">
+                <span class="tile"><svg aria-hidden="true"><use href="#i-flood"/></svg></span>
+                <div>
+                  <h4 class="note-title">Floodwater</h4>
+                  <p>Never drive, ride or walk through floodwater. If it's flooded, forget it.</p>
+                  <a class="note-src" href="https://www.ses.nsw.gov.au/" target="_blank" rel="noopener">NSW SES<span class="sr-only"> (opens in a new tab)</span></a>
+                </div>
+              </li>
+              <li class="note">
+                <span class="tile"><svg aria-hidden="true"><use href="#i-bushfire"/></svg></span>
+                <div>
+                  <h4 class="note-title">Fire danger</h4>
+                  <p>Check the Fire Danger Rating before every trip. On a Catastrophic day, stay out of bush fire risk areas.</p>
+                  <a class="note-src" href="https://www.rfs.nsw.gov.au/" target="_blank" rel="noopener">NSW RFS<span class="sr-only"> (opens in a new tab)</span></a>
+                </div>
+              </li>
+              <li class="note">
+                <span class="tile"><svg aria-hidden="true"><use href="#i-route"/></svg></span>
+                <div>
+                  <h4 class="note-title">Trip plan</h4>
+                  <p>Tell someone your route and when you'll be back. Going remote? Carry a personal locator beacon (PLB).</p>
+                  <a class="note-src" href="https://www.nationalparks.nsw.gov.au/" target="_blank" rel="noopener">NSW National Parks<span class="sr-only"> (opens in a new tab)</span></a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sign-up -->
+    <section class="section signup" id="signup" aria-labelledby="signup-title">
+      <div class="container">
+        <div class="signup-card">
+          <div class="signup-intro">
+            <p class="eyebrow eyebrow-on-dark">The waitlist</p>
+            <h2 id="signup-title">Be first in</h2>
+            <p class="signup-lede">Join free and we'll let you know the moment it's ready.</p>
+            <ul class="perks" role="list">
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Launch news, first</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Field day dates near Sydney</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>No spam. Unsubscribe anytime.</li>
+            </ul>
+            <svg class="signup-art" viewBox="0 0 160 160" aria-hidden="true">
+              <circle cx="80" cy="84" r="62" fill="#1F281E"/>
+              <circle cx="80" cy="80" r="60" fill="#D96B2B"/>
+              <circle cx="80" cy="80" r="60" fill="none" stroke="#B4521C" stroke-width="4" stroke-dasharray="2 7.42"/>
+              <circle cx="80" cy="80" r="48" fill="#FBF7EF"/>
+              <path fill="none" stroke="#2E3A2C" stroke-width="3" stroke-linecap="round" d="M80 37v8M123 80h-8M80 123v-8M37 80h8"/>
+              <path fill="none" stroke="#2E3A2C" stroke-width="2" stroke-linecap="round" opacity=".55" d="M102 41.9 104 38.4M118.1 58l3.5-2M118.1 102l3.5 2M102 118.1l2 3.5M58 118.1l-2 3.5M41.9 102l-3.5 2M41.9 58l-3.5-2M58 41.9l-2-3.5"/>
+              <g transform="rotate(-24 80 80)">
+                <path fill="#D96B2B" d="M80 46 88 80H72z"/>
+                <path fill="#2E3A2C" d="M80 114 72 80h16z"/>
+              </g>
+              <circle cx="80" cy="80" r="5" fill="#2E3A2C"/>
+              <circle cx="80" cy="80" r="2" fill="#FBF7EF"/>
+              <path fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".6" d="M46 60a40 40 0 0 1 20-20"/>
+            </svg>
+          </div>
+
+          <div class="signup-body">
+            <form id="waitlist-form" class="form" method="post" novalidate>
+              <div class="form-row">
+                <div class="field">
+                  <label class="label" for="first_name">First name <span class="opt">(optional)</span></label>
+                  <input class="input" id="first_name" name="first_name" type="text" autocomplete="given-name" maxlength="60">
+                </div>
+                <div class="field">
+                  <label class="label" for="email">Email</label>
+                  <input class="input" id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required aria-describedby="email-error">
+                  <p class="field-error" id="email-error"></p>
+                </div>
+              </div>
+
+              <fieldset class="field">
+                <legend class="label">Skills you most want to learn <span class="opt">(pick any)</span></legend>
+                <div class="chips">
+                  <label class="chip"><input type="checkbox" name="skills" value="Fire"><span>Fire</span></label>
+                  <label class="chip"><input type="checkbox" name="skills" value="Water"><span>Water</span></label>
+                  <label class="chip"><input type="checkbox" name="skills" value="Shelter"><span>Shelter</span></label>
+                  <label class="chip"><input type="checkbox" name="skills" value="Navigation"><span>Navigation</span></label>
+                  <label class="chip"><input type="checkbox" name="skills" value="Fishing &amp; food"><span>Fishing &amp; food</span></label>
+                  <label class="chip"><input type="checkbox" name="skills" value="First aid"><span>First aid</span></label>
+                  <label class="chip"><input type="checkbox" name="skills" value="Bushfire readiness"><span>Bushfire readiness</span></label>
+                </div>
+              </fieldset>
+
+              <fieldset class="field">
+                <legend class="label">Keen on in-person field days near Sydney?</legend>
+                <div class="chips">
+                  <label class="chip chip-radio"><input type="radio" name="field_days" value="Yes"><span>Yes</span></label>
+                  <label class="chip chip-radio"><input type="radio" name="field_days" value="Maybe"><span>Maybe</span></label>
+                  <label class="chip chip-radio"><input type="radio" name="field_days" value="No"><span>No</span></label>
+                </div>
+              </fieldset>
+
+              <div class="field field-postcode">
+                <label class="label" for="postcode">Postcode <span class="opt">(optional)</span></label>
+                <input class="input" id="postcode" name="postcode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="4" aria-describedby="postcode-hint postcode-error">
+                <p class="hint" id="postcode-hint">Helps us pick field day spots.</p>
+                <p class="field-error" id="postcode-error"></p>
+              </div>
+
+              <!-- Spam trap: people never see this field; bots fill it in. -->
+              <div class="hp" aria-hidden="true">
+                <label for="website">Leave this field empty</label>
+                <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+              </div>
+              <input type="hidden" name="form_loaded_at">
+              <input type="hidden" name="utm_source">
+              <input type="hidden" name="utm_medium">
+              <input type="hidden" name="utm_campaign">
+              <input type="hidden" name="referrer">
+
+              <div class="form-alert" id="form-alert" role="alert"></div>
+              <button class="btn btn-lg btn-block" type="submit" id="submit-btn">
+                <span class="spinner" aria-hidden="true"></span>
+                <span class="btn-label">Join the waitlist</span>
+              </button>
+              <p class="consent">By joining, you agree to get emails about <span data-site-name>SurvivalCamp</span>. Unsubscribe anytime.</p>
+              <noscript><p class="form-alert">This form needs JavaScript turned on. You can also join by emailing us (address below).</p></noscript>
+            </form>
+
+            <div class="success" id="signup-success" hidden>
+              <svg class="success-badge" viewBox="0 0 64 64" aria-hidden="true">
+                <circle cx="32" cy="32" r="30" fill="#2E3A2C"/>
+                <circle cx="32" cy="32" r="24" fill="none" stroke="#F4ECDD" stroke-width="2" stroke-dasharray="3 4"/>
+                <path fill="none" stroke="#F08A4B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M20 33l8 8 16-17"/>
+              </svg>
+              <h3 id="success-title" tabindex="-1">You're on the list</h3>
+              <p><span id="success-greeting">Nice one.</span> We'll email you when <span data-site-name>SurvivalCamp</span> is ready.</p>
+              <p class="success-ask">Know a mate who'd be keen? Send it their way.</p>
+              <button class="btn" type="button" id="share-btn"><svg class="btn-icon" aria-hidden="true"><use href="#i-share"/></svg>Share with a mate</button>
+              <div class="share-fallback" id="share-fallback" hidden>
+                <label class="label" for="share-url">Copy this link</label>
+                <input class="input" id="share-url" type="text" readonly>
+              </div>
+              <p class="share-status" id="share-status" role="status"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top">
+          <img src="assets/favicon.svg" width="34" height="34" alt="">
+          <span class="brand-name" data-site-name>SurvivalCamp</span>
+        </a>
+        <p>Real survival skills, one mission at a time.</p>
+      </div>
+      <div>
+        <h2 class="footer-h">Privacy</h2>
+        <p>We only collect what you give us here: your email, plus your name, skills, field-day interest and postcode if you add them, and how you found us (like the link you clicked). We use it only to send you <span data-site-name>SurvivalCamp</span> updates and plan field days. We never sell it. To be removed, email <a data-contact-email href="mailto:hello@example.com">hello@example.com</a>.</p>
+      </div>
+      <div>
+        <h2 class="footer-h">Stay safe</h2>
+        <p>Field notes here are general information, not a substitute for proper training or official emergency advice. In an emergency, call Triple Zero (000).</p>
+      </div>
+    </div>
+    <div class="container">
+      <div class="footer-base">
+        <p>© <span data-year>2026</span> <span data-site-name>SurvivalCamp</span></p>
+        <p>Contact: <a data-contact-email href="mailto:hello@example.com">hello@example.com</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
